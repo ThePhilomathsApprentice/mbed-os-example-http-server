@@ -9,17 +9,17 @@ Disclaimer: On Windows, You'll have to install python (Python 3.7.9), git (git v
 
 1. Delete ``mbed_app.json``. (Believe me, its going to save you a ton of time. Atleast, if you are using K64F.)
 2. Build the project  using mbed CLI.
-2.a. run "mbed new .'' in the directory of the cloned repo.
-2.b. Set the Target using "mbed target K64F"
-2.c. Set the Toolchain using "mbed toolchain GCC_ARM"
-2.d. Export to MCUXpresso IDE using "mbed export -i mcuxpresso"
-2.d.1 MCUXpresso on Windows never compiles mbed projects successfully, use mbed cli only for compilation.
+    * run "mbed new .'' in the directory of the cloned repo.
+    * Set the Target using "mbed target K64F"
+    * Set the Toolchain using "mbed toolchain GCC_ARM"
+    * Export to MCUXpresso IDE using "mbed export -i mcuxpresso"
+        * MCUXpresso on Windows never compiles mbed projects successfully, use mbed cli only for compilation.
 3. Add the mbed-http library using "mbed add http://os.mbed.com/teams/sandbox/code/mbed-http/"
 4. Compile using "mbed compile"
 5. Flash the project to your development board.
-5.a. Can Copmile and Flash using "mbed compile -f"
+    * Can Copmile and Flash using "mbed compile -f"
 6. Attach a serial monitor to your board to see the debug messages.
-6.a. Can see the serial messages using "mbed sterm -b <Baud>"
+    * Can see the serial messages using "mbed sterm -b <Baud>"
 
 ## Tested on
 
