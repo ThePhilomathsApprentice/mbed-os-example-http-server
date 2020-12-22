@@ -1,0 +1,7 @@
+Debug/*
+Release/*
+mbed-os/connectivity/drivers/nfc/*
+mbed-os/connectivity/drivers/cellular/*
+mbed-os/connectivity/cellular/*
+mbed-os/connectivity/nfc/*
+mbed-os/docs/*

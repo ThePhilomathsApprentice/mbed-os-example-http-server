@@ -1,10 +1,11 @@
-#include "mbed.h"
-#include "easy-connect.h"
+#include <mbed.h>
+#include <EthernetInterface.h>
 #include "http_server.h"
 #include "http_response_builder.h"
 
-Serial pc(USBTX, USBRX);
 DigitalOut led(LED1);
+
+EthernetInterface eth;
 
 // Requests come in here
 void request_handler(ParsedHttpRequest* request, TCPSocket* socket) {
@@ -40,24 +41,23 @@ void request_handler(ParsedHttpRequest* request, TCPSocket* socket) {
 }
 
 int main() {
-    pc.baud(115200);
+
+	printf("INFO:MBED_Version:%d.%d.%d\n",MBED_MAJOR_VERSION,MBED_MINOR_VERSION, MBED_PATCH_VERSION);
 
     // Connect to the network (see mbed_app.json for the connectivity method used)
-    NetworkInterface* network = easy_connect(true);
-    if (!network) {
-        printf("Cannot connect to the network, see serial output\n");
-        return 1;
-    }
+	SocketAddress a;
+	nsapi_error_t conn_err = eth.connect();
+	eth.get_ip_address(&a);
 
-    HttpServer server(network);
+    HttpServer server(&eth);
     nsapi_error_t res = server.start(8080, &request_handler);
 
     if (res == NSAPI_ERROR_OK) {
-        printf("Server is listening at http://%s:8080\n", network->get_ip_address());
+        printf("INFO:Server is listening at http://%s:8080\n", a.get_ip_address());
     }
     else {
-        printf("Server could not be started... %d\n", res);
+        printf("INFO:Server could not be started... %d\n", res);
     }
 
-    wait(osWaitForever);
+    ThisThread::sleep_for(osWaitForever);
 }
